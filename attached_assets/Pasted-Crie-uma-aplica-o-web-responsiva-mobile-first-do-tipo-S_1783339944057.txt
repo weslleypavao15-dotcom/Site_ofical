@@ -1,0 +1,43 @@
+Crie uma aplicação web responsiva (mobile-first) do tipo Single Page Application (SPA) para gestão de uma academia chamada "MJ Fitness". Utilize React (Vite), Tailwind CSS e a biblioteca 'lucide-react' para os ícones. O app deve ser totalmente funcional e salvar os dados localmente no navegador usando 'localStorage'.
+
+## 1. Tema, Estética Premium e Configuração de Cores
+- **Cores Globais:** O fundo do app (body) deve ser um off-white muito sutil (`bg-gray-50`) e os cards/conteúdos totalmente brancos (`bg-white`).
+- **Contraste e Textos:** TODOS os números grandes dos cards de resumo, contadores, datas e valores financeiros na tabela devem ser estritamente PRETOS (`text-black` ou `text-gray-900`) para legibilidade e destaque.
+- **Cor de Destaque (Vermelho da Logo):** Use um tom de vermelho escuro bem marcante (ex: hexadecimal `#5A0B13` ou `bg-red-950`) para botões de ação principal, ícones decorativos e realces.
+- **Layout Clean e Compacto:** Visual minimalista, sem excesso de bordas escuras. Use sombras suaves (`shadow-md`), cantos arredondados elegantes (`rounded-xl`), e um layout menor/compacto (fontes e paddings reduzidos) para exibir as informações de maneira densa, porém muito bonita.
+- **Logo Dinâmica:** O código deve importar a logo sempre de um caminho local fixo (ex: 'src/assets/logo.png'). Deixe a tag <img> configurada para que, assim que eu fizer o upload de uma nova foto e substituir esse arquivo de imagem com o mesmo nome, a logo mude automaticamente em todo o sistema.
+
+## 2. Navegação e Layout Principal
+- **Topbar (Parte de cima do site):** O fundo deve ser INTEIRAMENTE vermelho escuro (na cor da logo). O botão de menu (hamburger), a logo em tamanho reduzido e o texto "MJ Fitness" devem ser todos brancos (`text-white`).
+- **Sidebar (Menu Lateral):** Fundo geral da sidebar branco. A aba/link que estiver ativo (selecionado no momento) deve ter o fundo TOTALMENTE vermelho escuro com o texto e o ícone em branco. As abas inativas ficam com fundo transparente e texto preto/cinza.
+
+## 3. Telas e Funcionalidades
+
+### A. Tela: Menu Principal
+- 3 Cards de Resumo (KPIs) compactos: Total de Alunos, Mensalidades em Dia, Mensalidades Atrasadas. Os números grandes dentro deles devem ser pretos.
+- Formulário "Cadastrar Novo Aluno" (inputs em `bg-gray-50` com texto em preto): Nome, CPF, Telefone, Plano, Data de Matrícula.
+- Forma de Pagamento (Select com Emojis): "💠 Pix", "💵 Dinheiro", "💳 Cartão de Crédito", "💳 Cartão de Débito".
+- **Fluxo de Cadastro e Sucesso:** 
+  1. Ao clicar em "Cadastrar Aluno", abre um modal: "Deseja finalizar o cadastro de [Nome]?" (Botões: Cancelar e Confirmar).
+  2. Após confirmar, salva o aluno no localStorage e exibe um aviso visual flutuante (Toast): "Aluno cadastrado com sucesso!" que some após 3 segundos.
+
+### B. Tela: Alunos
+- Barra de busca compacta (texto em preto) e lista de alunos em cards minimalistas (IDs, CPFs e datas em preto).
+- **Fluxo de Renovação de Assinatura:**
+  1. Ao clicar em "Renovar Assinatura", abre um modal.
+  2. Neste modal, o usuário deve selecionar o **Novo Plano** em um dropdown (ex: Plano Mensal - R$ 100,00, Plano Trimestral - R$ 280,00) e a Forma de Pagamento.
+  3. Ao avançar, exibe um modal de confirmação: "Tem certeza que deseja renovar a assinatura de [Nome] no [Plano Selecionado]?" (Botões: Cancelar e Confirmar).
+  4. Ao confirmar, estende a data de vencimento do aluno, gera um novo histórico financeiro e exibe o Toast de sucesso: "Assinatura renovada com sucesso!".
+- **Fluxo de Exclusão:** Ao clicar na lixeira do aluno, abre modal: "Tem certeza que deseja apagar o registro de [Nome]?" (Botões: Cancelar e Sim, Excluir). Ao confirmar, remove e exibe aviso de sucesso.
+
+### C. Tela: Financeiro & Gráficos
+- 3 Cards de Resumo com valores numéricos em preto. Gráfico de barras "Receita por Período" com as barras na cor vermelha da logo.
+- Tabela de "Histórico Financeiro" (valores em preto, coluna "Pagamento" com os emojis correspondentes).
+- **Fluxo de Exclusão de Pagamento:** 
+  1. Na coluna "AÇÕES", inclua um botão de lixeira vermelho.
+  2. Ao clicar, exibe modal: "Tem certeza que deseja apagar este registro de pagamento? O faturamento e os gráficos serão recalculados." (Botões: Cancelar e Sim, Apagar).
+  3. Ao confirmar, remove do localStorage, atualiza as métricas da tela na hora e exibe o Toast: "Registro de pagamento apagado com sucesso!".
+
+## 4. Persistência de Dados (localStorage)
+- Crie um hook customizado (como `useLocalStorage`) para gerenciar as coleções de `students` e `transactions`.
+- Garanta que ao cadastrar, apagar ou renovar dados, os estados do React e a memória local sejam sincronizados perfeitamente para que nenhuma informação seja perdida ao recarregar a página.

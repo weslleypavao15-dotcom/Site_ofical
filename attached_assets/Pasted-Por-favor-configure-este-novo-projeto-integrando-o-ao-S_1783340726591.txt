@@ -1,0 +1,26 @@
+Por favor, configure este novo projeto integrando-o ao Supabase e aplicando todas as regras de negócio, nomenclatura e design especificadas abaixo. Subititua completamente qualquer uso de dados falsos ou 'localStorage' por requisições reais ao banco de dados.
+
+Siga estritamente estas diretrizes:
+
+1. CONFIGURAÇÃO DO BANCO (SUPABASE):
+   - Instale a biblioteca '@supabase/supabase-js'.
+   - Crie o arquivo 'src/supabaseClient.js' inicializando o cliente com 'import.meta.env.VITE_SUPABASE_URL' e 'import.meta.env.VITE_SUPABASE_ANON_KEY'.
+   - Todas as operações de CRUD devem ser diretas e assíncronas (async/await) nas tabelas 'students' e 'transactions' (sem usar funções RPC antigas):
+     * Cadastro de Aluno: INSERT na tabela 'students' calculando a 'data_vencimento' para exatamente 1 mês após a data de matrícula.
+     * Renovação: UPDATE na tabela 'students' (adicionando +1 mês no vencimento) e INSERT na tabela 'transactions' (com valor fixo de R$ 100).
+     * Deleções: DELETE direto filtrando pelo ID correspondente.
+
+2. NOMENCLATURA E REGRAS DE NEGÓCIO:
+   - Altere qualquer menção ao termo "Dashboard" no sistema para "Menu Principal" (na navegação, títulos e rotas).
+   - Unificação de Planos: Remova opções de planos trimestrais ou anuais. A única opção disponível no cadastro e renovação deve ser o "Plano Mensal – R$ 100,00".
+
+3. DESIGN E IDENTIDADE VISUAL:
+   - Cores Gerais: O cabeçalho superior e os elementos de layout principais devem usar o conjunto visual de vermelho escuro.
+   - Números e KPIs: Garanta que absolutamente TODOS os números do site (valores em dinheiro, contador de alunos, IDs e datas) estejam na cor preta pura (text-black ou text-gray-900) para alto contraste.
+   - Botões de Confirmação: Todos os botões de ação positiva/confirmação dentro dos modais devem ser vermelho escuro com texto em branco.
+   - Ícones: Os pequenos ícones ao lado dos nomes nos blocos de resumo (Total de Alunos, Mensalidades em Dia, etc.) devem seguir o padrão visual vermelho e branco.
+   - Logo do Site: Posicione a logo de forma totalmente centralizada no meio do cabeçalho da página inicial.
+
+4. FILTRO DINÂMICO NO GRÁFICO FINANCEIRO:
+   - Na tela "Financeiro", adicione um seletor amigável logo acima do gráfico de receitas.
+   - O gráfico deve se atualizar imediatamente ao selecionar uma das opções: Geral (todas as entradas), Dinheiro em Mãos, Pix, Cartão de Crédito ou Cartão de Débito.
